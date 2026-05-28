@@ -15,10 +15,10 @@ runInPath("temp", function() {
 
 // ---
 
-Shell.remove("output/_site/andora/client/andora.css");
-Shell.copy("source/_site/andora/client/andora.css", "temp/andora.css");
+Shell.remove("output/_site/andora/web/client/andora.css");
+Shell.copy("source/_site/andora/web/client/andora.css", "temp/andora.css");
 runInPath("temp", function() {
-	Shell.system("npx @tailwindcss/cli  -i ./andora.css -o ./../output/_site/andora/client/andora.css --minify");
+	Shell.system("npx @tailwindcss/cli  -i ./andora.css -o ./../output/_site/andora/web/client/andora.css --minify");
 });
 
 // ---

@@ -1,6 +1,3 @@
-# andora
-Framework for PHP
-
 # Andora
 
 Framework for PHP

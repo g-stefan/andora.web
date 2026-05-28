@@ -3,73 +3,63 @@
 // SPDX-FileCopyrightText: 2026 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Apache-2.0
 
-namespace Andora\User\Login {
+namespace User\Login;
 
-    defined("XYO_WEB") or die("Forbidden");
+defined("ANDORA") or die("Forbidden");
 
-    require_once("./_site/xyo/web/web.php");
-    require_once("./_site/andora/component/message-error.php");
-    require_once("./_site/andora/component/message-ok.php");
-    require_once("./_site/andora/model/user.php");
+use \Andora\Web\Component\MessageError;
+use \Andora\Web\Component\MessageOk;
+use \Andora\Web\Model\User;
 
-    require_once("./user/login/form.php");
+class Page extends \XYO\Web\Page
+{
+    protected $form = null;
 
-    use \Andora\Component\MessageError;
-    use \Andora\Component\MessageOk;
-    use \Andora\Model\User;
-
-    class Page extends \XYO\Web\Page
+    public function init($options = null)
     {
-        protected $form = null;
+        $this->setTitle("Andora - " . $this->language->get("page.title"));
+        $this->form = Form::register($this, "form");
+    }
 
-        public function init($options = null)
-        {
-            $this->setTitle("Andora - " . $this->language->get("page.title"));
-            $this->form = Form::register($this, "form");
+    public function process($options = null)
+    {
+        if (!$this->isPOST()) {
+            return;
+        }
+        if ($this->form->hasError()) {
+            return;
         }
 
-        public function process($options = null)
-        {
-            if (!$this->isPOST()) {
-                return;
-            }
-            if ($this->form->hasError()) {
-                return;
-            }
-
-            $reason = "";
-            if (!User::login($this->form->value->email, $this->form->value->password, $reason)) {
-                $this->form->setElementError("email", true);
-                $this->form->setElementError("password", true);
-                $this->form->setElementAlert("email", true);
-                return;
-            }
-
-            // ---
-            MessageOk::registerAndInit($this, "form", array(
-                "title" => $this->language->get("page.title"),
-                "message" => $this->language->get("login-successfully")
-            ));
-            
-            if ($this->sessionGet("login_as_admin", false)) {
-                $this->sessionSet("login_as_admin", false);
-                if ($this->isAJAX()) {
-                    $this->view->renderJS(function () {
-                        echo "setTimeout(function(){";
-                        echo "document.location.href=\"" . $this->site . "admin/dashboard\";";
-                        echo "},1500);";
-                    });
-                }
-            }
-
+        $reason = "";
+        if (!User::login($this->web, $this->form->value->email, $this->form->value->password, $reason)) {
+            $this->form->setElementError("email", true);
+            $this->form->setElementError("password", true);
+            $this->form->setElementAlert("email", true);
+            return;
         }
 
-        public function render($options = null)
-        {
-            $this->renderComponent("form");
+        // ---
+        MessageOk::registerAndInit($this, "form", array(
+            "title" => $this->language->get("page.title"),
+            "message" => $this->language->get("login-successfully")
+        ));       
+        
+        if ($this->session->get("login_as_admin", false)) {
+            $this->session->set("login_as_admin", false);
+            $this->view->renderJS(function () {
+                echo "setTimeout(function(){";
+                echo "document.location.href=\"" . $this->site . "admin/dashboard\";";
+                echo "},1500);";
+            });
         }
 
     }
 
-    return Page::class;
+    public function render($options = null)
+    {
+        $this->renderComponent("form");
+    }
+
 }
+
+return Page::class;

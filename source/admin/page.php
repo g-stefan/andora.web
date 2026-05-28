@@ -3,26 +3,24 @@
 // SPDX-FileCopyrightText: 2026 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Apache-2.0
 
-namespace Andora\Admin {
+namespace Admin;
 
-    defined("XYO_WEB") or die("Forbidden");
+defined("ANDORA") or die("Forbidden");
 
-    require_once("./_site/xyo/web/web.php");
-    
-    class Page extends \XYO\Web\Page
+class Page extends \XYO\Web\Page
+{
+    public function init($options = null)
     {
-        public function init($options = null)
-        {
-        
-            
-        }
 
-        public function render($options = null)
-        {
-            
-        }            
 
     }
 
-    return Page::class;
+    public function render($options = null)
+    {
+
+    }
+
 }
+
+return Page::class;
+

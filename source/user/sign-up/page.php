@@ -3,53 +3,45 @@
 // SPDX-FileCopyrightText: 2026 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Apache-2.0
 
-namespace Andora\User\SignUp {
+namespace Andora\Web\User\SignUp;
 
-    defined("XYO_WEB") or die("Forbidden");
+defined("ANDORA") or die("Forbidden");
 
-    require_once("./_site/xyo/web/web.php");
-    require_once("./_site/andora/model/user.php");
-    require_once("./_site/andora/component/message-error.php");
-    require_once("./_site/andora/component/message-ok.php");
+use \Andora\Web\Component\MessageError;
+use \Andora\Web\Component\MessageOk;
+use \Andora\Web\Model\User;
 
-    require_once("./user/sign-up/form.php");
+class Page extends \XYO\Web\Page
+{
+    protected $form = null;
 
-    use \Andora\Component\MessageError;
-    use \Andora\Component\MessageOk;
-    use \Andora\Model\User;
-
-    class Page extends \XYO\Web\Page
+    public function init($options = null)
     {
-        protected $form = null;        
-
-        public function init($options = null)
-        {
-            $this->setTitle("Andora - " . $this->language->get("page.title"));
-            $this->form = Form::register($this, "form");
-        }
-
-        public function process($options = null)
-        {
-            if (!$this->isPOST()) {
-                return;
-            }
-            if ($this->form->hasError()) {
-                return;
-            }
-
-            // ---
-            MessageOk::registerAndInit($this, "form", array(
-                "title" => $this->language->get("page.title"),
-                "message" => $this->language->get("thank-you-for-your-registration...")
-            ));
-        }
-
-        public function render($options = null)
-        {
-            $this->renderComponent("form");
-        }
-
+        $this->setTitle("Andora - " . $this->language->get("page.title"));
+        $this->form = Form::register($this, "form");
     }
 
-    return Page::class;
+    public function process($options = null)
+    {
+        if (!$this->isPOST()) {
+            return;
+        }
+        if ($this->form->hasError()) {
+            return;
+        }
+
+        // ---
+        MessageOk::registerAndInit($this, "form", array(
+            "title" => $this->language->get("page.title"),
+            "message" => $this->language->get("thank-you-for-your-registration...")
+        ));
+    }
+
+    public function render($options = null)
+    {
+        $this->renderComponent("form");
+    }
+
 }
+
+return Page::class;

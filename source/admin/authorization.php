@@ -1,49 +1,40 @@
 <?php
-// XYO.Web
-// Copyright (c) 2024 Grigore Stefan <g_stefan@yahoo.com>
-// MIT License (MIT) <http://opensource.org/licenses/MIT>
-// SPDX-FileCopyrightText: 2024 Grigore Stefan <g_stefan@yahoo.com>
-// SPDX-License-Identifier: MIT
+// Andora
+// SPDX-FileCopyrightText: 2026 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-License-Identifier: Apache-2.0
 
-namespace Andora\Admin {
+namespace Admin;
 
-    defined("XYO_WEB") or die("Forbidden");
+defined("ANDORA") or die("Forbidden");
 
-    require_once("./_site/xyo/web/web.php");
-    require_once("./_site/andora/model/user.php");
+use \Andora\Web\Model\User;
 
-    use \Andora\Model\User;
-
-    class Authorization extends \XYO\Web\Authorization
+class Authorization extends \XYO\Web\Authorization
+{
+    public function checkAuthorization()
     {
 
-
-        public function setHeaders()
-        {
-            $info = \XYO\Web\Info::instance();
-            $config = \XYO\Web\Config::instance();
-
-            $reason = "";
-            $isAuthorized = false;            
-            if ($config->get("configured")) {
-                if (User::checkCurrentSession($reason)) {                    
-                    $isAuthorized = true;
-                }
-            }            
-
-            if (!$isAuthorized) {
-                $this->sessionSet("login_as_admin", true);
-                header("Location: " . $info->sitePath . "user/login", true, 302);
-                exit(0);
+        $reason = "";
+        $isAuthorized = false;
+        if ($this->config->get("configured")) {
+            if (User::checkCurrentSession($this->web, $reason)) {
+                $isAuthorized = true;
             }
-
-            if (strcmp($info->path, "admin") == 0) {
-                header("Location: " . $info->sitePath . "admin/dashboard", true, 302);
-            }
-
         }
 
+        if (!$isAuthorized) {
+            $this->session->set("login_as_admin", true); 
+            header("Location: " . $this->info->site . "user/login", true, 302);            
+            exit(0);
+        }        
+
+        if (strcmp($this->info->path, "admin") == 0) {
+            header("Location: " . $this->info->site . "admin/dashboard", true, 302);
+        }
+
+        return true;
     }
 
-    return Authorization::class;
 }
+
+return Authorization::class;

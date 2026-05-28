@@ -3,63 +3,57 @@
 // SPDX-FileCopyrightText: 2026 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Apache-2.0
 
-namespace Andora\Admin\Settings {
+namespace Andora\Web\Admin\Settings;
 
-    defined("XYO_WEB") or die("Forbidden");
+defined("ANDORA") or die("Forbidden");
 
-    require_once("./_site/xyo/web/web.php");
-    require_once("./_site/xyo/lucide-icons/lucide-icons.php");
-    require_once("./_site/andora/component/form.php");
-    require_once("./_site/andora/model/setup.php");
+use \XYO\LucideIcons\LucideIcons;
+use \Andora\Web\Model\Setup;
 
-    use \XYO\LucideIcons;
-    use \Andora\Model\Setup;
+class SMTPFormTestConfiguration extends \Andora\Web\Component\Form
+{
 
-    class SMTPFormTestConfiguration extends \Andora\Component\Form
+    public function init($options = null)
+    {
+        parent::init($options);
+
+        LucideIcons::register($this, "icons");
+    }
+
+    public function process($options = null)
     {
 
-        public function init($options = null)
-        {
-            parent::init($options);
-
-            LucideIcons::register($this, "icons");
+        if (!$this->isPOST()) {
+            return;
         }
 
-        public function process($options = null)
-        {
-
-            if (!$this->isPOST()) {
-                return;
-            }
-
-            if ($this->hasError()) {
-                return;
-            }
-
-            $this->setIsDone(true);
+        if ($this->hasError()) {
+            return;
         }
 
-        public function renderAJAX($options = null)
-        {
+        $this->setIsDone(true);
+    }
 
-            $this->renderFormAJAX(function () {
-                ?>
+    public function renderAJAX($options = null)
+    {
 
-                <button type="submit" class="btn btn-neutral">
-                    <?php $this->language->render("smtp-form-test-configuration.submit"); ?>
-                </button>
+        $this->renderFormAJAX(function () {
+            ?>
 
-                <?php
-            }, "flex flex-col gap-2");
+            <button type="submit" class="btn btn-neutral">
+                <?php $this->language->render("smtp-form-test-configuration.submit"); ?>
+            </button>
 
-        }
-
-        public function renderContainer($options = null)
-        { ?>
-            <div class="relative w-full flex flex-col mt-4 text-center" id="<?php echo $this->id; ?>">
-                <?php $this->renderAJAX(); ?>
-            </div>
             <?php
-        }
+        }, "flex flex-col gap-2");
+
+    }
+
+    public function renderContainer($options = null)
+    { ?>
+        <div class="relative w-full flex flex-col mt-4 text-center" id="<?php echo $this->id; ?>">
+            <?php $this->renderAJAX(); ?>
+        </div>
+        <?php
     }
 }

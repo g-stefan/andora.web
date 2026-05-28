@@ -3,9 +3,8 @@
 // SPDX-FileCopyrightText: 2026 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: Apache-2.0
 
-defined("XYO_WEB") or die("Forbidden");
+namespace Setup;
 
-require_once("./_site/xyo/web/web.php");
-require_once("./_site/andora/layout/setup.php");
+defined("ANDORA") or die("Forbidden");
 
-return \Andora\Layouts\Setup::class;
+return \Andora\Web\Layout\Setup::class;
