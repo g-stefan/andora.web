@@ -24,6 +24,16 @@ class SidebarUser extends \XYO\Web\Component
         LucideIcons::register($this, "icons");
     }
 
+    // Content of #sidebar-user-avatar: the image, or a user icon when there is none.
+    // The profile page replaces it after the avatar is changed.
+    public static function avatarHTML($url)
+    {
+        if (is_null($url)) {
+            return "<span class=\"w-full h-full flex items-center justify-center\"><i class=\"lucide-user-round text-xl text-base-content/50\"></i></span>";
+        }
+        return "<img src=\"" . htmlspecialchars($url, ENT_QUOTES) . "\" alt=\"\" class=\"w-full h-full object-cover\" />";
+    }
+
     public function render($options = null)
     {
         if (!is_null($options)) {
@@ -37,19 +47,19 @@ class SidebarUser extends \XYO\Web\Component
         ?>
 
         <!-- Dropdown Component -->
-        <div class="dropdown dropdown-right dropdown-end w-full group">
+        <div class="dropdown dropdown-right dropdown-end w-full group" id="sidebar-user-menu">
 
             <!-- Trigger Button -->
             <div tabindex="0" role="button"
                 class="flex items-center gap-3 p-2 rounded-sm group-hover:bg-base-300/50 transition-colors w-full cursor-pointer peer">
                 <div class="avatar">
-                    <div class="w-9 h-9 rounded-lg overflow-hidden border border-base-200/50">
-                        <!-- img src="https://i.pravatar.cc/150?u=shadcn" alt="User Avatar" class="object-cover" / -->
+                    <div class="w-9 h-9 rounded-md overflow-hidden border border-base-200/50 bg-base-300" id="sidebar-user-avatar">
+                        <?php echo self::avatarHTML(\Andora\Web\Model\User::getCurrentUserAvatarURL($this->web)); ?>
                     </div>
                 </div>
                 <div class="flex-1 text-left overflow-hidden">
-                    <div class="text-sm font-semibold text-base-content truncate">Administrator</div>
-                    <div class="text-xs text-base-content/60 truncate">admin@example.com</div>
+                    <div class="text-sm font-semibold text-base-content truncate"><?php echo htmlspecialchars("" . \Andora\Web\Model\User::$user__name, ENT_QUOTES); ?></div>
+                    <div class="text-xs text-base-content/60 truncate"><?php echo htmlspecialchars("" . \Andora\Web\Model\User::$user__email, ENT_QUOTES); ?></div>
                 </div>
                 <div class="text-base-content/40 group-hover:text-base-content/70 transition-colors">
                     <?php $this->renderComponent("icons", array("icon" => "ellipsis-vertical", "class" => "text-lg text-base-content/60 group-hover:text-base-content transition-colors")); ?>
@@ -71,7 +81,7 @@ class SidebarUser extends \XYO\Web\Component
                     if ($link[0] == "link") { ?>
                         <li>
                             <a href="<?php echo $link[3]; ?>"
-                                class="flex items-center gap-2.5 py-2 px-2.5 text-sm font-medium text-base-content/80 hover:text-base-content hover:bg-base-300/50 rounded-lg transition-colors group/link">
+                                class="flex items-center gap-2.5 py-2 px-2.5 text-sm font-medium text-base-content/80 hover:text-base-content hover:bg-base-300/50 rounded-md transition-colors group/link">
                                 <?php $this->renderComponent("icons", array("icon" => $link[1], "class" => "text-base text-base-content/60 group-hover/link:text-base-content transition-colors")); ?>
                                 <?php echo $link[2]; ?>
                             </a>

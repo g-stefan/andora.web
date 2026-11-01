@@ -19,7 +19,11 @@ class LogoAndora extends \XYO\Web\Component
 
     public function render($options = null)
     {
-        echo "<div class=\"logo-andora\"></div>";
+        $class = "logo-andora";
+        if (is_array($options) && array_key_exists("class", $options)) {
+            $class .= " " . $options["class"];
+        }
+        echo "<div class=\"" . htmlspecialchars($class, ENT_QUOTES) . "\"></div>";
     }
 
 }

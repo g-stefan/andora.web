@@ -1,0 +1,31 @@
+{
+	"vendor": "acme",
+	"name": "example",
+	"version": "#{VERSION_VERSION}",
+	"title": "Example",
+	"description": "Example package: a public page, an admin page with a table, a permission",
+	"license": "Apache-2.0",
+	"author": "ACME <office@acme.example>",
+	"require": {
+		"php": ">=8.0",
+		"andora/web": ">=0.4"
+	},
+	"route": {
+		"example": "route/example",
+		"admin/example": "route/admin/example"
+	},
+	"event": {
+		"provide": {
+			"acme-example.item-add": "An item was added in /admin/example: itemId, userId"
+		},
+		"listen": {
+			"user.create": "onUserCreate",
+			"user.delete": "onUserDelete",
+			"user.login": "onUserLogin",
+			"acme-example.item-add": "onItemAdd"
+		}
+	},
+	"datasource": [
+		"Acme\\Example\\DataSource\\TableItem"
+	]
+}

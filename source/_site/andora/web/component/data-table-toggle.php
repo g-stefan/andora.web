@@ -13,7 +13,7 @@ class DataTableToggle extends \XYO\Web\Component
 {
     public $primaryKeyId = null;
     public $value = null;
-    public $toggleFn = null;
+    public $onToggle_ = null;
 
     public function init($options = null)
     {
@@ -21,9 +21,9 @@ class DataTableToggle extends \XYO\Web\Component
 
         $this->primaryKeyId = 0;
         $this->value = false;
-        $this->toggleFn = null;
-        if (array_key_exists("toggleFn", $options)) {
-            $this->toggleFn = $options["toggleFn"];
+        $this->onToggle_ = null;
+        if (array_key_exists("onToggle", $options)) {
+            $this->onToggle_ = $options["onToggle"];
         }
     }
 
@@ -37,8 +37,8 @@ class DataTableToggle extends \XYO\Web\Component
         }
 
         $this->primaryKeyId = $this->request->get("id", 0);
-        if (!is_null($this->toggleFn)) {
-            $this->value = ($this->toggleFn)($this->primaryKeyId);
+        if (!is_null($this->onToggle_)) {
+            $this->value = ($this->onToggle_)($this->primaryKeyId);
         }
     }
 

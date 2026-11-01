@@ -1,10 +1,26 @@
 # Andora
 
-Framework for PHP
+User accounts and administration area for PHP web applications, built on the
+XYO.Web framework.
 
-- Object based 
-- Multiple database backends (MySql, Postgresql, SQlite3)
-- Active Record Pattern
+- Setup wizard: language, database (SQLite, MySQL, PostgreSQL), administrator account
+- User pages: sign up, e-mail confirmation, login, forgot password, password reset
+- Admin area: users, user groups, permissions (grant / deny), SMTP settings
+- Access to the admin area by the `admin` permission
+
+## Build and run
+
+```bash
+fabricare make
+php -S 127.0.0.1:8080 -t output test/_lib/router.php
+```
+
+Then open http://127.0.0.1:8080/setup. Tests: `fabricare test`.
+
+## Documentation
+
+See [docs/README.md](docs/README.md): installation, user guide,
+administration, configuration and development.
 
 ## License
 

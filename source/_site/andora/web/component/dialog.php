@@ -63,7 +63,7 @@ class Dialog extends \XYO\Web\Component
     { ?>
         <dialog id="<?php echo $this->id; ?>_dialog" class="modal transition-all">
             <div class="modal-box transition-all">
-                <div id="<?php echo $this->id; ?>" class="<?php echo $this->cssClass; ?>" class="transition-all">
+                <div id="<?php echo $this->id; ?>" class="<?php echo $this->cssClass; ?> transition-all">
                     <?php $this->renderComponent($this->component); ?>
                 </div>
                 <form method="dialog">

@@ -1,5 +1,6 @@
 {
 	"solution": {
+		"namespace" : "xyo",
 		"name" : "andora",
 		"type" : "generic",
 		"projects": [
@@ -9,9 +10,10 @@
 			}
 		],
 		"releaseOutput" : true,
+		"releaseNoPlatform": true,
 		"vendor" : {
-			"xyo.web" : "0.135.0",
-			"xyo.web.library": "0.20.0"
+			"xyo.web" : "0.149.0",
+			"xyo.web.library": "0.22.0"
 		}
 	}
 }

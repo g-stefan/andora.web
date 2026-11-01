@@ -15,12 +15,12 @@ Shell.mkdirRecursivelyIfNotExists("temp");
 // ---
 
 if (!Shell.fileExists("temp/build.xyo.web.vendor.flag")) {
-    exitIf(Shell.system("7zr x vendor/xyo.web-"+Solution.vendor["xyo.web"]+".7z -aoa -ooutput"));
+    exitIf(Shell.system("7z x vendor/xyo.web.v"+Solution.vendor["xyo.web"]+".zip -aoa -ooutput"));
     Shell.filePutContents("temp/build.xyo.web.vendor.flag", "done");
 };
 
 if (!Shell.fileExists("temp/build.xyo.web.library.vendor.flag")) {
-    exitIf(Shell.system("7zr x vendor/xyo.web.library-"+Solution.vendor["xyo.web.library"]+".7z -aoa -ooutput"));
+    exitIf(Shell.system("7z x vendor/xyo.web.library.v"+Solution.vendor["xyo.web.library"]+".zip -aoa -ooutput"));
     Shell.filePutContents("temp/build.xyo.web.library.vendor.flag", "done");
 };
 
@@ -28,5 +28,15 @@ exitIf(!Shell.copyDirRecursively("source", "output"));
 
 // ---
 
-Fabricare.include("make.tailwind");
+exitIf(xyoVersion("--project=" + Project.name,
+                  "--file-in=source/_site/andora/web/andora.php",
+                  "--file-out=output/_site/andora/web/andora.php"));
+
+exitIf(xyoVersion("--project=" + Project.name,
+                  "--file-in=source/_site/andora/web/package.json",
+                  "--file-out=output/_site/andora/web/package.json"));
+
+// ---
+
+Fabricare.include("make.tailwindcss");
 

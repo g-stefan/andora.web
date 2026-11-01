@@ -117,7 +117,7 @@ class InputEMail extends \XYO\Web\Component
                    echo " ";
                    echo $autofocus;
                    ?> minlength="2" maxlength="64" id="<?php echo $this->id; ?>"
-                value="<?php echo $this->value; ?>" />
+                value="<?php echo htmlspecialchars("" . $this->value, ENT_QUOTES); ?>" />
             <p class="validator-hint hidden">
                 <?php $this->language->render("enter-valid-email-address"); ?>
             </p>

@@ -17,7 +17,7 @@ class TableUserXPermission extends \XYO\Web\DataSource\Table
 
     public static function descriptor($info)
     {
-        $info->name = "user-x-permission";
+        $info->name = "andora-web-user-x-permission";
         $info->primaryKey = "id";
         $info->fields = array(
             "id" => array("bigint", "DEFAULT", "unsigned", "autoIncrement"),

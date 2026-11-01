@@ -117,7 +117,7 @@ class InputPasswordText extends \XYO\Web\Component
                    echo " ";
                    echo $autofocus;
                    ?> id="<?php echo $this->id; ?>" title="<?php $this->language->render("title.password"); ?>"
-                value="<?php echo $this->value; ?>" />
+                value="<?php echo htmlspecialchars("" . $this->value, ENT_QUOTES); ?>" />
             <p class="validator-hint hidden">
                 <?php $this->language->render("required"); ?>.
             </p>

@@ -23,7 +23,7 @@ class TableUser extends \XYO\Web\DataSource\Table
     public $action;
     public $action_at;
     public $language;
-    public $picture;
+    public $avatar;
     public $invisible;
     public $uuid;
     public $description;
@@ -36,7 +36,7 @@ class TableUser extends \XYO\Web\DataSource\Table
 
     public static function descriptor($info)
     {
-        $info->name = "user";
+        $info->name = "andora-web-user";
         $info->primaryKey = "id";
         $info->fields = array(
             "id" => array("bigint", "DEFAULT", "unsigned", "autoIncrement"),

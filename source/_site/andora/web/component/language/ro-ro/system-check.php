@@ -1,0 +1,88 @@
+<?php
+// Andora
+// SPDX-FileCopyrightText: 2026 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-License-Identifier: Apache-2.0
+
+defined("ANDORA") or die("Forbidden");
+
+return array(
+    "system-check.title" => "Verificare sistem",
+    "system-check.ready" => "Serverul indeplineste cerintele Andora.",
+    "system-check.not-ready" => "Serverul nu indeplineste cerintele Andora, corectati erorile de mai jos si verificati din nou.",
+    "system-check.php" => "PHP",
+    "system-check.php-and-extensions" => "PHP si extensii",
+    "system-check.folders" => "Drept de scriere",
+    "system-check.required-extensions" => "Extensii necesare",
+    "system-check.database-drivers" => "Drivere de baza de date (cel putin unul)",
+    "system-check.optional-extensions" => "Extensii optionale",
+    "system-check.limits" => "Setari PHP",
+    "system-check.protection" => "Directoare private",
+    "system-check.protection.exposed" => "Serverul web trimite acest fisier: oricine poate descarca baza de date, fisierele incarcate si jurnalele. Activati .htaccess (AllowOverride All, mod_rewrite, mod_access_compat) sau blocati directoarele _repository/ si _log/.",
+    "system-check.server" => "Server",
+    "system-check.database" => "Baza de date",
+    "system-check.logs" => "Jurnale (_log/)",
+    "system-check.no-logs" => "Nu exista jurnale.",
+    "system-check.router-log" => "Ultimele erori",
+    "system-check.router-log.note" => "Sfarsitul fisierului {value}: erorile din spatele unei pagini 501.",
+
+    "system-check.status.ok" => "OK",
+    "system-check.status.error" => "Eroare",
+    "system-check.status.warning" => "Avertisment",
+    "system-check.status.missing" => "Indisponibil",
+    "system-check.status.info" => "Informatie",
+
+    "system-check.php.too-old" => "Este necesar PHP {limit}. Alegeti o versiune PHP mai noua pentru acest site (cPanel: MultiPHP Manager sau Select PHP Version).",
+    "system-check.php.end-of-life" => "Aceasta versiune PHP nu mai primeste corecturi de securitate, folositi PHP {limit} sau mai nou.",
+
+    "system-check.ext.pdo" => "Acces la baza de date (PDO).",
+    "system-check.ext.json" => "Date JSON.",
+    "system-check.ext.mbstring" => "Text UTF-8 (nume, cautare).",
+    "system-check.ext.openssl" => "E-mailuri prin SMTPS, semnaturile pachetelor.",
+    "system-check.ext.session" => "Sesiuni, protectia formularelor (CSRF).",
+    "system-check.ext.filter" => "Validarea adreselor de e-mail si a datelor.",
+    "system-check.ext.hash" => "Parole si tokenuri.",
+    "system-check.driver.mysql" => "Baza de date MySQL / MariaDB.",
+    "system-check.driver.postgresql" => "Baza de date PostgreSQL.",
+    "system-check.driver.sqlite" => "Baza de date SQLite (un fisier in _repository/).",
+    "system-check.ext.gd" => "Fara ea nu se pot salva pozele de profil (avatar).",
+    "system-check.ext.curl" => "Fara ea nu se poate folosi catalogul de pachete la distanta.",
+    "system-check.ext.zlib" => "Necesara pentru arhivele pachetelor si copiile de siguranta ale bazei de date (sau zip).",
+    "system-check.ext.zip" => "Arhivele pachetelor si copiile de siguranta (fara ea se foloseste zlib).",
+    "system-check.ext.intl" => "Adrese de e-mail cu nume de domeniu internationale.",
+    "system-check.ext.fileinfo" => "Detectarea tipului de fisier.",
+    "system-check.ext.opcache" => "PHP mai rapid (scripturile compilate sunt pastrate).",
+    "system-check.ext.opcache-disabled" => "Incarcata, dar opcache.enable este oprit.",
+
+    "system-check.folder.root" => "Fisierele de configurare (config.*.php).",
+    "system-check.folder._repository" => "Baza de date SQLite, avatarele, pachetele si copiile de siguranta.",
+    "system-check.folder._log" => "Jurnalele.",
+    "system-check.folder._site" => "Pachetele instalate sau actualizate dintr-o arhiva.",
+    "system-check.folder.not-found" => "Directorul lipseste, incarcati din nou toate fisierele Andora.",
+    "system-check.folder.not-writable.root" => "PHP nu poate scrie in directorul site-ului: fisierele de configurare nu pot fi salvate. Dati drept de scriere utilizatorului PHP (de obicei 755 cand PHP ruleaza ca proprietarul contului).",
+    "system-check.folder.not-writable._repository" => "PHP nu poate scrie in _repository/: baza de date, avatarele si pachetele nu pot fi salvate.",
+    "system-check.folder.not-writable._log" => "PHP nu poate scrie in _log/: erorile nu sunt inregistrate.",
+    "system-check.folder.not-writable._site" => "PHP nu poate scrie in _site/: pachetele nu pot fi instalate sau actualizate dintr-o arhiva.",
+    "system-check.file.not-writable" => "PHP nu poate modifica acest fisier, verificati proprietarul si drepturile lui.",
+    "system-check.folder.upload-temp" => "PHP nu poate scrie in directorul fisierelor incarcate: incarcarile nu reusesc.",
+    "system-check.folder.session" => "PHP nu poate scrie in directorul sesiunilor: autentificarea si formularele nu functioneaza.",
+
+    "system-check.limit.memory" => "Memorie putina, se recomanda cel putin {limit}.",
+    "system-check.limit.file-uploads" => "Incarcarea fisierelor este oprita: avatarele, pachetele si copiile de siguranta nu pot fi incarcate.",
+    "system-check.limit.upload" => "Cel mai mare fisier care poate fi incarcat (pachete, copii de siguranta).",
+    "system-check.limit.upload-small" => "Limita de incarcare mica: pachetele si copiile de siguranta mai mari de {value} nu pot fi incarcate (se recomanda {limit}).",
+    "system-check.limit.post" => "Mai mic decat upload_max_filesize ({limit}): incarcarile se opresc la post_max_size.",
+    "system-check.limit.time" => "Limita de timp mica, operatiile cu pachete si copii de siguranta se pot opri (se recomanda {limit} secunde sau mai mult).",
+    "system-check.limit.display-errors" => "Erorile sunt afisate vizitatorilor, opriti-l pe un site public.",
+    "system-check.limit.error-log" => "Se foloseste jurnalul serverului web.",
+    "system-check.limit.timezone" => "Nu este setat in php.ini, se foloseste {value}. Setati date.timezone pentru ore corecte in jurnale si e-mailuri.",
+    "system-check.limit.charset" => "Se recomanda UTF-8.",
+    "system-check.limit.open-basedir" => "PHP poate deschide fisiere doar in aceste directoare.",
+    "system-check.limit.opcache-timestamps" => "Fisierele PHP modificate nu sunt reincarcate: dupa o actualizare reporniti PHP sau goliti cache-ul.",
+
+    "system-check.server.owner" => "PHP ruleaza ca alt utilizator decat proprietarul fisierelor: PHP poate sa nu poata modifica fisierele incarcate prin FTP.",
+    "system-check.server.https" => "Site-ul nu este folosit prin HTTPS: parolele si cookie-urile sunt trimise necriptat.",
+    "system-check.server.https-proxy" => "HTTPS se termina la un proxy, PHP vede HTTP: cookie-urile securizate nu sunt setate.",
+    "system-check.server.site-url" => "Nu este adresa acestei pagini ({limit}): legaturile din e-mailuri duc la siteURL. Modificati-l in config.04.configured.php daca site-ul s-a mutat.",
+    "system-check.server.disk" => "Spatiu liber pe disc putin.",
+    "system-check.database.connection" => "Baza de date nu poate fi deschisa, vezi _log/<data>.router.log."
+);

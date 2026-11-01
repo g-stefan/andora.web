@@ -3,3 +3,4 @@
 /temp/
 /release/
 /vendor/
+/.claude/settings.local.json

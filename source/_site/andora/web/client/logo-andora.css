@@ -21,6 +21,11 @@
     background-position: center;
 }
 
+/* Scale the logo down to fit its box (small screens) */
+.logo-andora.logo-andora-contain {
+    background-size: contain;
+}
+
 @media (prefers-color-scheme: dark) {
     .logo-andora {
         background-image: url("logo-andora-dark.png");

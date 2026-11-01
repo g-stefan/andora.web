@@ -116,7 +116,7 @@ class InputText extends \XYO\Web\Component
                    echo $autocomplete;
                    echo " ";
                    echo $autofocus;
-                   ?> id="<?php echo $this->id; ?>" value="<?php echo $this->value; ?>" />
+                   ?> id="<?php echo $this->id; ?>" value="<?php echo htmlspecialchars("" . $this->value, ENT_QUOTES); ?>" />
             <p class="validator-hint hidden">
                 <?php $this->language->render("required"); ?>
             </p>

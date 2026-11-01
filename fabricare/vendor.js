@@ -7,5 +7,5 @@ messageAction("vendor");
 
 Fabricare.include("vendor.xyo.web");
 Fabricare.include("vendor.xyo.web.library");
-Fabricare.include("vendor.tailwind");
+Fabricare.include("vendor.tailwindcss");
 

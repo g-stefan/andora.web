@@ -17,7 +17,7 @@ class TableUserGroupXPermission extends \XYO\Web\DataSource\Table
 
     public static function descriptor($info)
     {
-        $info->name = "user-group-x-permission";
+        $info->name = "andora-web-user-group-x-permission";
         $info->primaryKey = "id";
         $info->fields = array(
             "id" => array("bigint", "DEFAULT", "unsigned", "autoIncrement"),

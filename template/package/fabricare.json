@@ -1,0 +1,14 @@
+{
+	"solution": {
+		"name" : "acme.example",
+		"type" : "generic",
+		"projects": [
+			{
+				"name" : "acme.example",
+				"SPDX-License-Identifier": "Apache-2.0"
+			}
+		],
+		"releaseOutput" : true,
+		"releaseNoPlatform": true
+	}
+}

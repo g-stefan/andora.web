@@ -1,0 +1,88 @@
+<?php
+// Andora
+// SPDX-FileCopyrightText: 2026 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-License-Identifier: Apache-2.0
+
+defined("ANDORA") or die("Forbidden");
+
+return array(
+    "system-check.title" => "System check",
+    "system-check.ready" => "The server meets the requirements of Andora.",
+    "system-check.not-ready" => "The server does not meet the requirements of Andora, fix the errors below and check again.",
+    "system-check.php" => "PHP",
+    "system-check.php-and-extensions" => "PHP and extensions",
+    "system-check.folders" => "Write permission",
+    "system-check.required-extensions" => "Required extensions",
+    "system-check.database-drivers" => "Database drivers (at least one)",
+    "system-check.optional-extensions" => "Optional extensions",
+    "system-check.limits" => "PHP settings",
+    "system-check.protection" => "Private folders",
+    "system-check.protection.exposed" => "The web server sends this file: anyone can download the database, the uploaded files and the logs. Enable .htaccess (AllowOverride All, mod_rewrite, mod_access_compat) or deny the _repository/ and _log/ folders.",
+    "system-check.server" => "Server",
+    "system-check.database" => "Database",
+    "system-check.logs" => "Logs (_log/)",
+    "system-check.no-logs" => "No log files.",
+    "system-check.router-log" => "Last errors",
+    "system-check.router-log.note" => "The end of {value}: the errors behind a 501 page.",
+
+    "system-check.status.ok" => "OK",
+    "system-check.status.error" => "Error",
+    "system-check.status.warning" => "Warning",
+    "system-check.status.missing" => "Not available",
+    "system-check.status.info" => "Information",
+
+    "system-check.php.too-old" => "PHP {limit} is required. Select a newer PHP version for this site (cPanel: MultiPHP Manager or Select PHP Version).",
+    "system-check.php.end-of-life" => "This PHP version does not get security fixes anymore, use PHP {limit} or newer.",
+
+    "system-check.ext.pdo" => "Database access (PDO).",
+    "system-check.ext.json" => "JSON data.",
+    "system-check.ext.mbstring" => "UTF-8 text (names, search).",
+    "system-check.ext.openssl" => "E-mails over SMTPS, package signatures.",
+    "system-check.ext.session" => "Sessions, form protection (CSRF).",
+    "system-check.ext.filter" => "E-mail address and input validation.",
+    "system-check.ext.hash" => "Passwords and tokens.",
+    "system-check.driver.mysql" => "MySQL / MariaDB database.",
+    "system-check.driver.postgresql" => "PostgreSQL database.",
+    "system-check.driver.sqlite" => "SQLite database (a file in _repository/).",
+    "system-check.ext.gd" => "Profile pictures (avatars) can not be saved without it.",
+    "system-check.ext.curl" => "The remote package catalog can not be used without it.",
+    "system-check.ext.zlib" => "Package zips and database backups need it (or zip).",
+    "system-check.ext.zip" => "Package zips and database backups (zlib is used without it).",
+    "system-check.ext.intl" => "E-mail addresses with international domain names.",
+    "system-check.ext.fileinfo" => "File type detection.",
+    "system-check.ext.opcache" => "Faster PHP (compiled scripts are cached).",
+    "system-check.ext.opcache-disabled" => "Loaded, but opcache.enable is off.",
+
+    "system-check.folder.root" => "The configuration files (config.*.php).",
+    "system-check.folder._repository" => "The SQLite database, avatars, packages and backups.",
+    "system-check.folder._log" => "The log files.",
+    "system-check.folder._site" => "Packages installed or upgraded from a zip.",
+    "system-check.folder.not-found" => "The folder is missing, upload all the files of Andora again.",
+    "system-check.folder.not-writable.root" => "PHP can not write the site folder: the configuration files can not be saved. Give the PHP user write permission (usually 755 when PHP runs as the account owner).",
+    "system-check.folder.not-writable._repository" => "PHP can not write _repository/: the database, the avatars and the packages can not be saved.",
+    "system-check.folder.not-writable._log" => "PHP can not write _log/: errors are not logged.",
+    "system-check.folder.not-writable._site" => "PHP can not write _site/: packages can not be installed or upgraded from a zip.",
+    "system-check.file.not-writable" => "PHP can not change this file, check its owner and permission.",
+    "system-check.folder.upload-temp" => "PHP can not write the folder of the uploaded files: uploads fail.",
+    "system-check.folder.session" => "PHP can not write the session folder: logins and forms do not work.",
+
+    "system-check.limit.memory" => "Low memory, at least {limit} is recommended.",
+    "system-check.limit.file-uploads" => "File uploads are off: avatars, packages and backups can not be uploaded.",
+    "system-check.limit.upload" => "The largest file that can be uploaded (packages, backups).",
+    "system-check.limit.upload-small" => "Small upload limit: packages and backups larger than {value} can not be uploaded ({limit} recommended).",
+    "system-check.limit.post" => "Smaller than upload_max_filesize ({limit}): uploads stop at post_max_size.",
+    "system-check.limit.time" => "Short time limit, package and backup operations may stop ({limit} seconds or more recommended).",
+    "system-check.limit.display-errors" => "Errors are shown to the visitors, turn it off on a public site.",
+    "system-check.limit.error-log" => "The web server log is used.",
+    "system-check.limit.timezone" => "Not set in php.ini, {value} is used. Set date.timezone for the right times in the logs and e-mails.",
+    "system-check.limit.charset" => "UTF-8 is recommended.",
+    "system-check.limit.open-basedir" => "PHP can open files only in these folders.",
+    "system-check.limit.opcache-timestamps" => "Changed PHP files are not reloaded: after an upgrade restart PHP or reset the cache.",
+
+    "system-check.server.owner" => "PHP runs as another user than the owner of the files: PHP may not be able to change the files uploaded by FTP.",
+    "system-check.server.https" => "The site is not used over HTTPS: passwords and cookies are sent unencrypted.",
+    "system-check.server.https-proxy" => "HTTPS ends at a proxy, PHP sees HTTP: secure cookies are not set.",
+    "system-check.server.site-url" => "Not the address of this page ({limit}): the links of the e-mails go to siteURL. Change it in config.04.configured.php if the site moved.",
+    "system-check.server.disk" => "Low free disk space.",
+    "system-check.database.connection" => "The database can not be opened, see _log/<date>.router.log."
+);

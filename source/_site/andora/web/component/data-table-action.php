@@ -73,7 +73,7 @@ class DataTableAction extends \XYO\Web\Component
                         ?>
                         <li>
                             <a href="<?php echo $link[3] . "?" . $options["primaryKey"][0] . "=" . $options["primaryKey"][1]; ?>"
-                                class="flex items-center gap-2.5 py-2 px-2.5 text-sm font-medium rounded-lg transition-colors group/link <?php echo $class; ?>">
+                                class="flex items-center gap-2.5 py-2 px-2.5 text-sm font-medium rounded-md transition-colors group/link <?php echo $class; ?>">
                                 <?php $this->renderComponent("icons", array("icon" => $link[1], "class" => "text-base transition-colors " . $classIcon)); ?>
                                 <?php echo $link[2]; ?>
                             </a>
@@ -94,7 +94,7 @@ class DataTableAction extends \XYO\Web\Component
                         ?>
                         <li>
                             <a href="#" id="<?php echo $this->id . "_" . $index; ?>"
-                                class="flex items-center gap-2.5 py-2 px-2.5 text-sm font-medium rounded-lg transition-colors group/link <?php echo $class; ?>">
+                                class="flex items-center gap-2.5 py-2 px-2.5 text-sm font-medium rounded-md transition-colors group/link <?php echo $class; ?>">
                                 <?php $this->renderComponent("icons", array("icon" => $link[1], "class" => "text-base transition-colors " . $classIcon)); ?>
                                 <?php echo $link[2]; ?>
                             </a>

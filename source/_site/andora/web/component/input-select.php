@@ -99,11 +99,11 @@ class InputSelect extends \XYO\Web\Component
                    ?>>
                 <?php
                 foreach ($this->list as $key => $value) {
-                    echo "<option value=\"" . $key . "\"";
-                    if (strcmp($this->value, $key) == 0) {
+                    echo "<option value=\"" . htmlspecialchars("" . $key, ENT_QUOTES) . "\"";
+                    if (strcmp("" . $this->value, "" . $key) == 0) {
                         echo " selected=\"selected\"";
                     }
-                    echo ">" . $value . "</option>";
+                    echo ">" . htmlspecialchars("" . $value, ENT_QUOTES) . "</option>";
                 }
                 ?>
             </select>
@@ -135,6 +135,10 @@ class InputSelect extends \XYO\Web\Component
     public function validateValue()
     {
         if (strlen($this->value) == 0) {
+            $this->parent->setElementError($this->name, true);
+            return false;
+        }
+        if (!array_key_exists($this->value, $this->list)) {
             $this->parent->setElementError($this->name, true);
             return false;
         }

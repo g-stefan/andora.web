@@ -45,7 +45,12 @@ class Setup extends \XYO\Web\Layout
                     </div>
                     <div class="h-16"></div>
                 </div>
-                <div class="lg:block"><?php $this->renderComponent("logo-andora"); ?></div>
+                <!-- The logo stays at the top, the steps can be long (the system check) -->
+                <div class="hidden lg:block">
+                    <div class="sticky top-0 pt-24 px-12">
+                        <div class="w-full max-w-[832px] mx-auto aspect-[832/464]"><?php $this->renderComponent("logo-andora", array("class" => "logo-andora-contain")); ?></div>
+                    </div>
+                </div>
             </div>
             <?php $this->renderScripts(); ?>
         </body>

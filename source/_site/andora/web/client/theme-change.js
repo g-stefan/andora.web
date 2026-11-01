@@ -6,7 +6,13 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const themeRadios = document.getElementsByName("theme-dropdown");
-    const storedTheme = localStorage.getItem("theme");
+    // localStorage throws when the storage is blocked (privacy settings)
+    let storedTheme = null;
+    try {
+        storedTheme = localStorage.getItem("theme");
+    } catch (e) {
+        storedTheme = null;
+    }
 
     // Function to apply theme to document
     const applyTheme = (theme) => {
@@ -32,7 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
     themeRadios.forEach(radio => {
         radio.addEventListener("change", (e) => {
             const selectedTheme = e.target.value;
-            localStorage.setItem("theme", selectedTheme);
+            try {
+                localStorage.setItem("theme", selectedTheme);
+            } catch (e) {
+                // the theme is applied, only not remembered
+            }
             applyTheme(selectedTheme);
         });
     });

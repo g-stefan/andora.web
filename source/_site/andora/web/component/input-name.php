@@ -118,7 +118,7 @@ class InputName extends \XYO\Web\Component
                    echo " ";
                    echo $autofocus;
                    ?> minlength="2" maxlength="64" id="<?php echo $this->id; ?>"
-                value="<?php echo $this->value; ?>" />
+                value="<?php echo htmlspecialchars("" . $this->value, ENT_QUOTES); ?>" />
             <p class="validator-hint hidden">
                 <?php $this->language->render("required-must-be-2-to-64-characters"); ?>
             </p>
@@ -146,7 +146,8 @@ class InputName extends \XYO\Web\Component
 
     public function validateValue()
     {
-        if (strlen($this->value) < 2) {
+        $length = function_exists("mb_strlen") ? mb_strlen($this->value, "UTF-8") : strlen($this->value);
+        if (($length < 2) || ($length > 64)) {
             $this->parent->setElementError($this->name, true);
             return false;
         }

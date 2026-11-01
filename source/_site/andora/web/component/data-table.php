@@ -173,11 +173,11 @@ class DataTable extends \Andora\Web\Component\Form
 
         if ($this->isAJAX()) {
             if ($this->hasSelector()) {
-                $info = explode("=", $this->getSelector());
-                $componentKey = $info[0];
-                $componentId = $info[1];
-                if (!is_null($componentKey)) {
-                    if (!is_null($componentId)) {
+                $info = explode("=", "" . $this->getSelector(), 2);
+                if (count($info) == 2) {
+                    $componentKey = $info[0];
+                    $componentId = $info[1];
+                    if (array_key_exists($componentKey, $this->componentList)) {
                         $this->componentList[$componentKey][0]::register($this, $componentId, $this->componentList[$componentKey][1]);
                     }
                 }
@@ -208,32 +208,32 @@ class DataTable extends \Andora\Web\Component\Form
         $clickLastPage = ($this->getElementValueNumber("lastPage", 0) > 0) ? true : false;
         $pageIndex = $this->getElementValueNumber("pageIndex", 0);
 
+        $pageIndex = intval($pageIndex);
         if ($clickPreviousPage) {
             $pageIndex = $pageIndex - 1;
-        }
-        if ($pageIndex < 1) {
-            $pageIndex = 1;
         }
         if ($clickNextPage) {
             $pageIndex = $pageIndex + 1;
         }
-        if ($pageIndex > $this->pagesCount) {
-            $pageIndex = $this->pagesCount;
+        if ($pageIndex < 1) {
+            $pageIndex = 1;
         }
         if ($clickFirstPage) {
             $pageIndex = 1;
         }
         if ($clickLastPage) {
-            $pageIndex = 1;
             $this->query->loadLast = true;
         }
 
-        $this->query->loadIndex = ($pageIndex - 1) * ($this->query->loadCount);
+        // Clamped to the number of pages in processQuery, once the count of items is known
         $this->pageIndex = $pageIndex;
 
         // ---
 
-        $this->itemsCountPerPage = $this->getElementValueString("itemsCountPerPage", "25");
+        $itemsCountPerPage = $this->getElementValueString("itemsCountPerPage", $this->itemsCountPerPage);
+        if (array_key_exists($itemsCountPerPage, $this->itemsCountSelect)) {
+            $this->itemsCountPerPage = $itemsCountPerPage;
+        }
 
         // ---
 
@@ -254,9 +254,12 @@ class DataTable extends \Andora\Web\Component\Form
             if ($sortType == 2) {
                 $mode = "descendent";
             }
-        $this->query->sort = array($this->sort[$sortIndex] => $mode);
-        $this->sortIndex = $sortIndex;
-        $this->sortType = $sortType;
+        // Only data columns can be used to sort
+        if (array_key_exists($sortIndex, $this->sort) && ($this->type[$this->sort[$sortIndex]] == "text")) {
+            $this->query->sort = array($this->sort[$sortIndex] => $mode);
+            $this->sortIndex = $sortIndex;
+            $this->sortType = $sortType;
+        }
 
         // ---
 
@@ -269,25 +272,42 @@ class DataTable extends \Andora\Web\Component\Form
 
     public function processQuery()
     {
-        if (strcmp($this->itemsCountPerPage, "*") == 0) {
+        if (strcmp("" . $this->itemsCountPerPage, "*") == 0) {
             $this->query->loadCount = 0;
             $this->query->loadAll = true;
         } else {
             $this->query->loadCount = intval($this->itemsCountPerPage);
             $this->query->loadAll = false;
+            if ($this->query->loadCount < 1) {
+                $this->query->loadCount = 25;
+            }
         }
 
+        if ($this->pageIndex < 1) {
+            $this->pageIndex = 1;
+        }
+        if ($this->query->loadAll) {
+            $this->pageIndex = 1;
+        }
+        $this->query->loadIndex = ($this->pageIndex - 1) * $this->query->loadCount;
+
         $result = ($this->queryFn)($this->query);
-        $this->rows = $result["rows"];
         $this->totalItemsCount = $result["count"];
         if ($this->query->loadAll) {
             $this->pagesCount = 1;
         } else {
-            $this->pagesCount = floor($this->totalItemsCount / $this->query->loadCount) + 1;
+            $this->pagesCount = max(1, intval(ceil($this->totalItemsCount / $this->query->loadCount)));
         }
-        if ($this->pageIndex > $this->pagesCount) {
+        if ($this->query->loadLast) {
             $this->pageIndex = $this->pagesCount;
+        } else if ($this->pageIndex > $this->pagesCount) {
+            // The requested page is past the end, show the last page
+            $this->pageIndex = $this->pagesCount;
+            $this->query->loadIndex = ($this->pageIndex - 1) * $this->query->loadCount;
+            $result = ($this->queryFn)($this->query);
+            $this->totalItemsCount = $result["count"];
         }
+        $this->rows = $result["rows"];
     }
 
     public function processDatasource($query)
@@ -332,7 +352,7 @@ class DataTable extends \Andora\Web\Component\Form
             $table->load();
         } else
             if ($query->loadLast) {
-                $table->load(floor($count / $query->loadCount) * $query->loadCount, $query->loadCount);
+                $table->load(max(0, intval(ceil($count / $query->loadCount)) - 1) * $query->loadCount, $query->loadCount);
             } else {
                 $table->load($query->loadIndex, $query->loadCount);
             }
@@ -362,11 +382,13 @@ class DataTable extends \Andora\Web\Component\Form
                 <label class="input">
                     <?php $this->renderComponent("icons", array("icon" => "search", "class" => "text-base")); ?>
                     <input type="search" class="grow" placeholder="Search" name="search"
-                        value="<?php echo $this->query->search->text; ?>" />
+                        value="<?php echo htmlspecialchars("" . $this->query->search->text, ENT_QUOTES); ?>" />
                 </label>
-                <div class="btn btn-sm btn-square ml-auto" title="Add" id="<?php echo $this->id; ?>_add">
-                    <?php $this->renderComponent("icons", array("icon" => "plus", "class" => "text-base")); ?>
-                </div>
+                <?php if (!is_null($this->addFn)) { ?>
+                    <div class="btn btn-sm btn-square ml-auto" title="Add" id="<?php echo $this->id; ?>_add">
+                        <?php $this->renderComponent("icons", array("icon" => "plus", "class" => "text-base")); ?>
+                    </div>
+                <?php } ?>
             </div>
 
             <table class="table overflow-visible">
@@ -468,7 +490,7 @@ class DataTable extends \Andora\Web\Component\Form
                                     <td class="group-hover:bg-base-200  <?php echo $tdClass; ?>">
                                         <?php if ($this->type[$key] == "selector") { ?>
 
-                                            <input type="checkbox" class="checkbox" name="selector[]" $value="<?php echo $cell; ?>"
+                                            <input type="checkbox" class="checkbox" name="selector[]" value="<?php echo htmlspecialchars("" . $cell, ENT_QUOTES); ?>"
                                                 id="<?php echo $this->id; ?>_check_<?php echo $rowIndex; ?>" />
 
                                             <?php continue;
@@ -476,18 +498,21 @@ class DataTable extends \Andora\Web\Component\Form
 
                                         <?php if ($this->type[$key] == "component") {
                                             if (!is_null($this->primaryKeyIndex)) {
-                                                $componentId = $key . "_" . $row[$this->primaryKeyIndex];
+                                                // The primary key value, by its position in the selected columns
+                                                $primaryKey = $this->sort[$this->primaryKeyIndex + 1];
+                                                $primaryKeyValue = $row[$this->rowIndex[$primaryKey]];
+                                                $componentId = $key . "_" . $primaryKeyValue;
                                                 $this->setSelector($key . "=" . $componentId);
                                                 $component = $this->componentList[$key][0]::registerAndInit($this, $componentId, $this->componentList[$key][1]);
                                                 $component->render(array(
-                                                    "primaryKey" => array($this->sort[$this->primaryKeyIndex + 1], $row[$this->primaryKeyIndex]),
+                                                    "primaryKey" => array($primaryKey, $primaryKeyValue),
                                                     "value" => array($key, $cell)
                                                 ));
                                             }
                                             continue;
                                         } ?>
 
-                                        <?php echo $cell; ?>
+                                        <?php echo htmlspecialchars("" . $cell, ENT_QUOTES); ?>
 
                                     </td>
                                 <?php } ?>

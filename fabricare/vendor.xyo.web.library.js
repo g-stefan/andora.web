@@ -5,11 +5,11 @@
 
 messageAction("vendor xyo.web.library");
 
-vendor =  "xyo.web.library-" + Solution.vendor["xyo.web.library"];
+vendor =  "xyo.web.library.v" + Solution.vendor["xyo.web.library"];
 
 Shell.mkdirRecursivelyIfNotExists("vendor");
 
-if (Shell.fileExists("vendor/" + vendor + ".7z")) {
+if (Shell.fileExists("vendor/" + vendor + ".zip")) {
 	return;
 };
 
@@ -23,11 +23,11 @@ if (Shell.hasEnv("VENDOR_SOURCE_AUTH")) {
 	vendorSourceAuth = Shell.getenv("VENDOR_SOURCE_AUTH");
 };
 
-var webLink = vendorSourceGit + "/xyo.web.library/releases/download/v" + Solution.vendor["xyo.web.library"] + "/" + vendor + ".7z";
+var webLink = vendorSourceGit + "/xyo.web.library/releases/download/v" + Solution.vendor["xyo.web.library"] + "/" + vendor + ".zip";
 Console.writeLn(webLink);
-exitIf(Shell.system("curl --insecure --location " + webLink + " " + vendorSourceAuth + " --output vendor/" + vendor + ".7z"));
-if (Shell.getFileSize("vendor/" + vendor + ".7z") < 16384) {
-	Shell.remove("vendor/" + vendor + ".7z");
+exitIf(Shell.system("curl --ca-native --location " + webLink + " " + vendorSourceAuth + " --output vendor/" + vendor + ".zip"));
+if (Shell.getFileSize("vendor/" + vendor + ".zip") < 16384) {
+	Shell.remove("vendor/" + vendor + ".zip");
 	messageError("not found - "+webLink);
 	return;
 };

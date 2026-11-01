@@ -132,9 +132,9 @@ class InputPasswordLogin extends \XYO\Web\Component
                    echo " ";
                    echo $autofocus;
                    ?> minlength="12" maxlength="64" id="<?php echo $this->id; ?>"
-                pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}"
+                pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*\-_]).{12,}"
                 title="<?php $this->language->render("title.must-be-at-least-12-characters-including..."); ?>"
-                value="<?php echo $this->value; ?>" />
+                value="<?php echo htmlspecialchars("" . $this->value, ENT_QUOTES); ?>" />
             <p class="validator-hint hidden">
                 <?php $this->language->render("enter-a-valid-password"); ?>
             </p>
@@ -172,7 +172,7 @@ class InputPasswordLogin extends \XYO\Web\Component
             $this->parent->setElementError($this->name, true);
             return false;
         }
-        $pattern = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}$/";
+        $pattern = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*\\-_]).{12,}$/";
         if (!preg_match($pattern, $this->value)) {
             $this->parent->setElementError($this->name, true);
             return false;

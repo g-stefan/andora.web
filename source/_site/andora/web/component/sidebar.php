@@ -27,6 +27,7 @@ class Sidebar extends \XYO\Web\Component
 
         LucideIcons::register($this, "icons");
         SidebarHeader::register($this, "sidebar-header");
+        SidebarPanel::register($this, "sidebar-panel");
         SidebarUser::register($this, "sidebar-user");
     }
 
@@ -37,7 +38,10 @@ class Sidebar extends \XYO\Web\Component
         }
 
         if (is_null($this->options)) {
-            $this->options = array("sidebar-content" => array(), "sidebar-bottom" => array());
+            $this->options = array("sidebar-content" => array(), "sidebar-panel" => array(), "sidebar-bottom" => array());
+        }
+        if (!array_key_exists("sidebar-panel", $this->options)) {
+            $this->options["sidebar-panel"] = array();
         }
 
         ?>
@@ -55,21 +59,21 @@ class Sidebar extends \XYO\Web\Component
                 <?php foreach ($this->options["sidebar-content"] as $key => $list) { ?>
 
                     <div>
-                        <h4 class="px-3 text-xs font-medium text-base-content/60 mb-2"><?php echo $key; ?></h4>
-                        <?php foreach ($list as $link) { ?>
-                            <ul class="flex flex-col gap-0.5 text-sm">
+                        <h4 class="px-3 text-xs font-medium text-base-content/60 mb-2"><?php echo htmlspecialchars("" . $key, ENT_QUOTES); ?></h4>
+                        <ul class="flex flex-col gap-0.5 text-sm">
+                            <?php foreach ($list as $link) { ?>
                                 <li>
                                     <?php if ($link[0]) { ?>
-                                        <a href="<?php echo $link[3]; ?>"
+                                        <a href="<?php echo htmlspecialchars("" . $link[3], ENT_QUOTES); ?>"
                                             class="flex items-center gap-3 px-3 py-2 rounded-md bg-base-300/50 text-base-content font-medium transition-colors">
                                             <?php $this->renderComponent("icons", array("icon" => $link[1], "class" => "text-base")); ?>
-                                            <?php echo $link[2]; ?>
+                                            <?php echo htmlspecialchars("" . $link[2], ENT_QUOTES); ?>
                                         </a>
                                     <?php } else { ?>
-                                        <a href="<?php echo $link[3]; ?>"
+                                        <a href="<?php echo htmlspecialchars("" . $link[3], ENT_QUOTES); ?>"
                                             class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-base-300/50 text-base-content/80 hover:text-base-content transition-colors font-medium group">
                                             <?php $this->renderComponent("icons", array("icon" => $link[1], "class" => "text-base text-base-content/60 group-hover:text-base-content transition-colors")); ?>
-                                            <?php echo $link[2]; ?>
+                                            <?php echo htmlspecialchars("" . $link[2], ENT_QUOTES); ?>
                                         </a>
                                     <?php } ?>
                                 </li>
@@ -87,21 +91,24 @@ class Sidebar extends \XYO\Web\Component
                     <?php foreach ($this->options["sidebar-bottom"] as $link) { ?>
                         <li>
                             <?php if ($link[0]) { ?>
-                                <a href="<?php echo $link[3]; ?>"
+                                <a href="<?php echo htmlspecialchars("" . $link[3], ENT_QUOTES); ?>"
                                     class="flex items-center gap-3 px-3 py-2 rounded-md bg-base-300/50 text-base-content font-medium transition-colors">
                                     <?php $this->renderComponent("icons", array("icon" => $link[1], "class" => "text-base")); ?>
-                                    <?php echo $link[2]; ?>
+                                    <?php echo htmlspecialchars("" . $link[2], ENT_QUOTES); ?>
                                 </a>
                             <?php } else { ?>
-                                <a href="<?php echo $link[3]; ?>"
+                                <a href="<?php echo htmlspecialchars("" . $link[3], ENT_QUOTES); ?>"
                                     class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-base-300/50 text-base-content/80 hover:text-base-content transition-colors font-medium group">
                                     <?php $this->renderComponent("icons", array("icon" => $link[1], "class" => "text-base text-base-content/60 group-hover:text-base-content transition-colors")); ?>
-                                    <?php echo $link[2]; ?>
+                                    <?php echo htmlspecialchars("" . $link[2], ENT_QUOTES); ?>
                                 </a>
                             <?php } ?>
                         </li>
                     <?php } ?>
                 </ul>
+
+                <!-- Administration Dropdown -->
+                <?php $this->renderComponent("sidebar-panel", $this->options["sidebar-panel"]); ?>
 
                 <!-- User Profile Dropdown / Card -->
                 <?php $this->renderComponent("sidebar-user"); ?>

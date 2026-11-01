@@ -25,41 +25,41 @@ class ThemeChange extends \XYO\Web\Component
         ?>
 
         <div class="dropdown dropdown-end">
-            <button tabindex="0" class="btn btn-square">
+            <button tabindex="0" class="btn btn-sm btn-square ml-auto">
                 <?php $this->renderComponent("icons", array("icon" => "sun", "class" => "text-xl")); ?>
             </button>
             <ul tabindex="0"
-                class="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 rounded-md w-52 border border-base-300 mt-1">
+                class="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 rounded-md min-w-32 border border-base-300 mt-1">
                 <li>
-                    <label class="flex items-center gap-3 p-3 cursor-pointer">
+                    <label class="flex items-center gap-2.5 py-2 px-2.5 text-sm font-medium rounded-md cursor-pointer">
                         <input type="radio" name="theme-dropdown" class="theme-controller hidden peer" value="light" checked
                             aria-label="Light" />
 
                         <?php echo $strIconCheck; ?>
 
-                        <span class="text-base font-normal">Light</span>
+                        <span class="text-base font-medium text-sm">Light</span>
                     </label>
                 </li>
 
                 <li>
-                    <label class="flex items-center gap-3 p-3 cursor-pointer">
+                    <label class="flex items-center gap-2.5 py-2 px-2.5 text-sm font-medium rounded-md cursor-pointer">
                         <input type="radio" name="theme-dropdown" class="theme-controller hidden peer" value="dark"
                             aria-label="Dark" />
 
                         <?php echo $strIconCheck; ?>
 
-                        <span class="text-base font-normal">Dark</span>
+                        <span class="text-base font-medium text-sm">Dark</span>
                     </label>
                 </li>
 
                 <li>
-                    <label class="flex items-center gap-3 p-3 cursor-pointer">
+                    <label class="flex items-center gap-2.5 py-2 px-2.5 text-sm font-medium rounded-md cursor-pointer">
                         <input type="radio" name="theme-dropdown" class="theme-controller hidden peer" value="default"
                             aria-label="System" />
 
                         <?php echo $strIconCheck; ?>
 
-                        <span class="text-base font-normal">System</span>
+                        <span class="text-base font-medium text-sm">System</span>
                     </label>
                 </li>
 

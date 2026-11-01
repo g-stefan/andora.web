@@ -7,7 +7,7 @@ defined("ANDORA") or die("Forbidden");
 
 return array(
     "enter-a-valid-password" => "Enter a valid password.",
-    "title.must-at-least-12-characters-including..." => "Must be at least 12 characters, including number, lowercase letter, uppercase letter and a special character: #?!@$%^&*-_",
+    "title.must-be-at-least-12-characters-including..." => "Must be at least 12 characters, including number, lowercase letter, uppercase letter and a special character: #?!@$%^&*-_",
     "must-be-at-least-12-characters-including..." =>
         "Must be at least 12 characters, including" .
         "<br />At least one number" .

@@ -1,0 +1,101 @@
+version = 1
+SPDX-PackageName = "Andora"
+SPDX-PackageSupplier = "Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-PackageDownloadLocation = "https://github.com/g-stefan/andora"
+
+[[annotations]]
+path = ".github/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-License-Identifier = "Unlicense"
+
+[[annotations]]
+path = ".github/CODE_OF_CONDUCT.md"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2014 Coraline Ada Ehmke <https://where.coraline.codes/>"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = [".gitignore", ".clang-format"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-License-Identifier = "Unlicense"
+
+[[annotations]]
+path = ".vscode/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-License-Identifier = "Unlicense"
+
+[[annotations]]
+path = ".claude/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-License-Identifier = "Unlicense"
+
+[[annotations]]
+path = "fabricare/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-License-Identifier = "Unlicense"
+
+[[annotations]]
+path = ["fabricare.json", "version.json"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-License-Identifier = "Unlicense"
+
+[[annotations]]
+path = "README.md"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-License-Identifier = "Unlicense"
+
+[[annotations]]
+path = "docs/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "source/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "test/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-License-Identifier = "Apache-2.0"
+
+# Third party: PHPMailer, installed by Composer (source/_site/composer.json)
+
+[[annotations]]
+path = "source/_site/vendor/phpmailer/**"
+precedence = "override"
+SPDX-FileCopyrightText = [
+    "2012 - 2020 Marcus Bointon <phpmailer@synchromedia.co.uk>",
+    "2010 - 2012 Jim Jagielski <jimjag@gmail.com>",
+    "2004 - 2009 Andy Prevost <codeworxtech@users.sourceforge.net>"
+]
+SPDX-License-Identifier = "LGPL-2.1-only"
+
+# Third party: Composer autoloader (generated)
+
+[[annotations]]
+path = ["source/_site/vendor/autoload.php", "source/_site/vendor/composer/**"]
+precedence = "override"
+SPDX-FileCopyrightText = "Nils Adermann, Jordi Boggiano"
+SPDX-License-Identifier = "MIT"
+[[annotations]]
+path = ["template/package/fabricare/**", "template/package/fabricare.json", "template/package/version.json", "template/package/.gitignore"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-License-Identifier = "Unlicense"
+
+[[annotations]]
+path = ["template/package/README.md", "template/package/source/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Grigore Stefan <g_stefan@yahoo.com>"
+SPDX-License-Identifier = "Apache-2.0"

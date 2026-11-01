@@ -15,6 +15,7 @@ class MessageOk extends \XYO\Web\Component
     public $message = null;
     public $reloadAfterTimeout = null;
     public $redirectAfterTimeout = null;
+    public $redirectURLAfterTimeout = null;
 
     public function init($options = null)
     {
@@ -37,6 +38,11 @@ class MessageOk extends \XYO\Web\Component
         $this->redirectAfterTimeout = null;
         if (array_key_exists("redirectAfterTimeout", $options)) {
             $this->redirectAfterTimeout = $options["redirectAfterTimeout"];
+        }
+
+        $this->redirectURLAfterTimeout = null;
+        if (array_key_exists("redirectURLAfterTimeout", $options)) {
+            $this->redirectURLAfterTimeout = $options["redirectURLAfterTimeout"];
         }
 
         LucideIcons::register($this, "icons");
@@ -74,6 +80,14 @@ class MessageOk extends \XYO\Web\Component
                 echo "setTimeout(function(){";
                 $this->redirectAfterTimeout[0]->renderJSRequestGet();
                 echo "}," . $this->redirectAfterTimeout[1] . ");";
+            });
+        }
+
+        if (!is_null($this->redirectURLAfterTimeout)) {
+            $this->view->renderJS(function () {
+                echo "setTimeout(function(){";
+                echo "document.location.href=" . json_encode($this->redirectURLAfterTimeout[0], JSON_UNESCAPED_SLASHES) . ";";
+                echo "}," . $this->redirectURLAfterTimeout[1] . ");";
             });
         }
     }

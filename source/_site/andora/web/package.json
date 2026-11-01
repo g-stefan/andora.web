@@ -1,0 +1,41 @@
+{
+	"vendor": "andora",
+	"name": "web",
+	"version": "#{VERSION_VERSION}",
+	"title": "Andora",
+	"description": "User accounts and administration area",
+	"license": "Apache-2.0",
+	"author": "Grigore Stefan <g_stefan@yahoo.com>",
+	"protected": true,
+	"route": {
+		"admin": "route/admin",
+		"user": "route/user",
+		"setup": "route/setup"
+	},
+	"event": {
+		"provide": {
+			"user.create": "A user account was created (sign-up, /admin/user, the administrator of the setup): userId",
+			"user.delete": "A user was deleted in /admin/user: userId",
+			"user.login": "A user logged in: userId",
+			"user.logout": "A user logged out: userId"
+		}
+	},
+	"datasource": [
+		"Andora\\Web\\DataSource\\TableUserGroup",
+		"Andora\\Web\\DataSource\\TableUser",
+		"Andora\\Web\\DataSource\\TableUserXUserGroup",
+		"Andora\\Web\\DataSource\\TablePermission",
+		"Andora\\Web\\DataSource\\TableUserGroupXPermission",
+		"Andora\\Web\\DataSource\\TableUserXPermission",
+		"Andora\\Web\\DataSource\\TableAdminMenu",
+		"Andora\\Web\\DataSource\\TablePackage",
+		"Andora\\Web\\DataSource\\TableUserDashboardPanel"
+	],
+	"require": {
+		"php": ">=8.0",
+		"xyo/web": ">=0.148.0",
+		"xyo/inter-font": "*",
+		"xyo/lucide-icons": "*",
+		"xyo/overlay-scrollbars": "*"
+	}
+}
